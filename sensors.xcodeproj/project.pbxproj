@@ -12,6 +12,8 @@
 		1A1484751D8EC5DF004A2A7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1484731D8EC5DF004A2A7F /* Main.storyboard */; };
 		1A1484771D8EC5DF004A2A7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1484761D8EC5DF004A2A7F /* Assets.xcassets */; };
 		1A14847A1D8EC5DF004A2A7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1484781D8EC5DF004A2A7F /* LaunchScreen.storyboard */; };
+		1A1484831D8EC67A004A2A7F /* sensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1484821D8EC67A004A2A7F /* sensors.m */; };
+		1A1484861D8EC82C004A2A7F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1484851D8EC82C004A2A7F /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,9 @@
 		1A1484761D8EC5DF004A2A7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A1484791D8EC5DF004A2A7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A14847B1D8EC5DF004A2A7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A1484811D8EC679004A2A7F /* sensors-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sensors-Bridging-Header.h"; sourceTree = "<group>"; };
+		1A1484821D8EC67A004A2A7F /* sensors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sensors.m; sourceTree = "<group>"; };
+		1A1484851D8EC82C004A2A7F /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1484861D8EC82C004A2A7F /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +46,7 @@
 			children = (
 				1A14846E1D8EC5DF004A2A7F /* sensors */,
 				1A14846D1D8EC5DF004A2A7F /* Products */,
+				1A1484841D8EC82C004A2A7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +61,24 @@
 		1A14846E1D8EC5DF004A2A7F /* sensors */ = {
 			isa = PBXGroup;
 			children = (
+				1A1484821D8EC67A004A2A7F /* sensors.m */,
 				1A14846F1D8EC5DF004A2A7F /* AppDelegate.swift */,
 				1A1484711D8EC5DF004A2A7F /* ViewController.swift */,
 				1A1484731D8EC5DF004A2A7F /* Main.storyboard */,
 				1A1484761D8EC5DF004A2A7F /* Assets.xcassets */,
 				1A1484781D8EC5DF004A2A7F /* LaunchScreen.storyboard */,
 				1A14847B1D8EC5DF004A2A7F /* Info.plist */,
+				1A1484811D8EC679004A2A7F /* sensors-Bridging-Header.h */,
 			);
 			path = sensors;
+			sourceTree = "<group>";
+		};
+		1A1484841D8EC82C004A2A7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A1484851D8EC82C004A2A7F /* IOKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +114,7 @@
 					1A14846B1D8EC5DF004A2A7F = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = PG35EX39B6;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -138,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1484721D8EC5DF004A2A7F /* ViewController.swift in Sources */,
+				1A1484831D8EC67A004A2A7F /* sensors.m in Sources */,
 				1A1484701D8EC5DF004A2A7F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,7 +223,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				HEADER_SEARCH_PATHS = "/Users/freedom/work/sensors/sensors/\n";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -248,7 +268,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				HEADER_SEARCH_PATHS = "/Users/freedom/work/sensors/sensors/\n";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -261,11 +282,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PG35EX39B6;
 				INFOPLIST_FILE = sensors/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mediatek.sensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "sensors/sensors-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -274,11 +298,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PG35EX39B6;
 				INFOPLIST_FILE = sensors/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mediatek.sensors;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "sensors/sensors-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
