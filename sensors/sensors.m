@@ -39,7 +39,11 @@ CFArrayRef getProductNames(CFDictionaryRef sensors) {
     for (int i = 0; i < count; i++) {
         IOHIDServiceClientRef sc = (IOHIDServiceClientRef)CFArrayGetValueAtIndex(matchingsrvs, i);
         CFStringRef name = IOHIDServiceClientCopyProperty(sc, CFSTR("Product"));
-        CFArrayAppendValue(array, name);
+        if (name) {
+            CFArrayAppendValue(array, name);
+        } else {
+            CFArrayAppendValue(array, @"noname");
+        }
     }
     return array;
 }
@@ -162,7 +166,7 @@ int main () {
     
     CFDictionaryRef currentSensors = matching(0xff08, 2);
     CFDictionaryRef voltageSensors = matching(0xff08, 3);
-    CFDictionaryRef thermalSensors = matching(0xff00, 5);
+    CFDictionaryRef thermalSensors = matching(0xff05, 5);
     
     CFArrayRef currentNames = getProductNames(system, currentSensors);
     CFArrayRef voltageNames = getProductNames(system, voltageSensors);
