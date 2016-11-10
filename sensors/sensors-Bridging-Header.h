@@ -4,7 +4,7 @@
 
 #include <Foundation/Foundation.h>
 #include <CoreFoundation/CoreFoundation.h>
-#include <IOKit/hid/IOHIDEventSystemClient.h>
+#include <IOKit/hidsystem/IOHIDEventSystemClient.h>
 
 extern CFDictionaryRef matching(int page, int usage);
 extern IOHIDEventSystemClientRef IOHIDEventSystemClientCreate(CFAllocatorRef allocator);

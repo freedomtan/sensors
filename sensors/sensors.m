@@ -1,17 +1,23 @@
-#include <IOKit/hid/IOHIDEventSystemClient.h>
+#include <IOKit/hidsystem/IOHIDEventSystemClient.h>
 #include <Foundation/Foundation.h>
 #include <stdio.h>
 
+// Declarations from other IOKit source code
+
+typedef struct __IOHIDEvent *IOHIDEventRef;
+typedef struct __IOHIDServiceClient *IOHIDServiceClientRef;
+#ifdef __LP64__
+typedef double IOHIDFloat;
+#else
+typedef float IOHIDFloat;
+#endif
 
 IOHIDEventSystemClientRef IOHIDEventSystemClientCreate(CFAllocatorRef allocator);
 int IOHIDEventSystemClientSetMatching(IOHIDEventSystemClientRef client, CFDictionaryRef match);
 int IOHIDEventSystemClientSetMatchingMultiple(IOHIDEventSystemClientRef client, CFArrayRef match);
-
-CFArrayRef IOHIDEventSystemClientCopyServices(IOHIDEventSystemClientRef, int);
-typedef struct __IOHIDServiceClient * IOHIDServiceClientRef;
 IOHIDEventRef IOHIDServiceClientCopyEvent(IOHIDServiceClientRef, int64_t , int32_t, int64_t);
-
 CFStringRef IOHIDServiceClientCopyProperty(IOHIDServiceClientRef service, CFStringRef property);
+IOHIDFloat IOHIDEventGetFloatValue(IOHIDEventRef event, int32_t field);
 
 CFDictionaryRef matching(int page, int usage)
 {
@@ -31,7 +37,7 @@ CFArrayRef getProductNames(CFDictionaryRef sensors) {
     IOHIDEventSystemClientRef system = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
     
     IOHIDEventSystemClientSetMatching(system, sensors);
-    CFArrayRef matchingsrvs = IOHIDEventSystemClientCopyServices(system, 0);
+    CFArrayRef matchingsrvs = IOHIDEventSystemClientCopyServices(system);
     
     long count = CFArrayGetCount(matchingsrvs);
     CFMutableArrayRef array = CFArrayCreateMutable(kCFAllocatorDefault, 0, &kCFTypeArrayCallBacks);
@@ -48,20 +54,28 @@ CFArrayRef getProductNames(CFDictionaryRef sensors) {
     return array;
 }
 
+// from IOHIDFamily/IOHIDEventTypes.h
+// e.g., https://opensource.apple.com/source/IOHIDFamily/IOHIDFamily-701.60.2/IOHIDFamily/IOHIDEventTypes.h.auto.html
+
+
+#define IOHIDEventFieldBase(type)   (type << 16)
+#define kIOHIDEventTypeTemperature  15
+#define kIOHIDEventTypePower        25
+
 CFArrayRef getPowerValues(CFDictionaryRef sensors) {
     IOHIDEventSystemClientRef system = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
     IOHIDEventSystemClientSetMatching(system, sensors);
-    CFArrayRef matchingsrvs = IOHIDEventSystemClientCopyServices(system, 0);
+    CFArrayRef matchingsrvs = IOHIDEventSystemClientCopyServices(system);
     
     long count = CFArrayGetCount(matchingsrvs);
     CFMutableArrayRef array = CFArrayCreateMutable(kCFAllocatorDefault, 0, &kCFTypeArrayCallBacks);
     for (int i = 0; i < count; i++) {
         IOHIDServiceClientRef sc = (IOHIDServiceClientRef)CFArrayGetValueAtIndex(matchingsrvs, i);
-        IOHIDEventRef event = IOHIDServiceClientCopyEvent(sc, 25, 0, 0);
+        IOHIDEventRef event = IOHIDServiceClientCopyEvent(sc, kIOHIDEventTypePower, 0, 0);
         
         CFNumberRef value;
         if (event != 0) {
-            double temp = IOHIDEventGetFloatValue(event, (IOHIDEventField)25 << 16);
+            double temp = IOHIDEventGetFloatValue(event, IOHIDEventFieldBase(kIOHIDEventTypePower));
             value = CFNumberCreate(kCFAllocatorDefault, kCFNumberDoubleType, &temp);
         } else {
             double temp = 0;
@@ -75,17 +89,17 @@ CFArrayRef getPowerValues(CFDictionaryRef sensors) {
 CFArrayRef getThermalValues(CFDictionaryRef sensors) {
     IOHIDEventSystemClientRef system = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
     IOHIDEventSystemClientSetMatching(system, sensors);
-    CFArrayRef matchingsrvs = IOHIDEventSystemClientCopyServices(system, 0);
+    CFArrayRef matchingsrvs = IOHIDEventSystemClientCopyServices(system);
     
     long count = CFArrayGetCount(matchingsrvs);
     CFMutableArrayRef array = CFArrayCreateMutable(kCFAllocatorDefault, 0, &kCFTypeArrayCallBacks);
     for (int i = 0; i < count; i++) {
         IOHIDServiceClientRef sc = (IOHIDServiceClientRef)CFArrayGetValueAtIndex(matchingsrvs, i);
-        IOHIDEventRef event = IOHIDServiceClientCopyEvent(sc, 15, 0, 0);
+        IOHIDEventRef event = IOHIDServiceClientCopyEvent(sc, kIOHIDEventTypeTemperature, 0, 0);
         
         CFNumberRef value;
         if (event != 0) {
-            double temp = IOHIDEventGetFloatValue(event, (IOHIDEventField)15 << 16);
+            double temp = IOHIDEventGetFloatValue(event, IOHIDEventFieldBase(kIOHIDEventTypeTemperature));
             value = CFNumberCreate(kCFAllocatorDefault, kCFNumberDoubleType, &temp);
         } else {
             double temp = 0;
@@ -162,7 +176,8 @@ int main () {
     //    kHIDUsage_AppleVendor_TemperatureSensor     = 0x0005,
     //    kHIDUsage_AppleVendorPowerSensor_Current    = 0x0002,
     //    kHIDUsage_AppleVendorPowerSensor_Voltage    = 0x0003,
-    // See IOHIDFamily-503.90.3/IOHIDFamily/AppleHIDUsageTables.h for more information
+    // See IOHIDFamily/AppleHIDUsageTables.h for more information
+    // https://opensource.apple.com/source/IOHIDFamily/IOHIDFamily-701.60.2/IOHIDFamily/AppleHIDUsageTables.h.auto.html
     
     CFDictionaryRef currentSensors = matching(0xff08, 2);
     CFDictionaryRef voltageSensors = matching(0xff08, 3);

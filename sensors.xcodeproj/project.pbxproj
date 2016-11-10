@@ -13,7 +13,7 @@
 		1A1484771D8EC5DF004A2A7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1484761D8EC5DF004A2A7F /* Assets.xcassets */; };
 		1A14847A1D8EC5DF004A2A7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A1484781D8EC5DF004A2A7F /* LaunchScreen.storyboard */; };
 		1A1484831D8EC67A004A2A7F /* sensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1484821D8EC67A004A2A7F /* sensors.m */; };
-		1A1484861D8EC82C004A2A7F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1484851D8EC82C004A2A7F /* IOKit.framework */; };
+		1A3A05C51DD45E84002B8E74 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1484851D8EC82C004A2A7F /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1484861D8EC82C004A2A7F /* IOKit.framework in Frameworks */,
+				1A3A05C51DD45E84002B8E74 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +108,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = MediaTek;
 				TargetAttributes = {
 					1A14846B1D8EC5DF004A2A7F = {
@@ -201,6 +201,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -252,6 +253,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -284,6 +286,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PG35EX39B6;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = sensors/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mediatek.sensors;
@@ -300,6 +303,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PG35EX39B6;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = sensors/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mediatek.sensors;
@@ -328,6 +332,7 @@
 				1A1484801D8EC5DF004A2A7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
