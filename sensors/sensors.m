@@ -163,13 +163,14 @@ NSArray* returnThermalValues() {
 }
 
 
-extern uint64_t my_mhz();
-extern void mybat();
+extern uint64_t my_mhz(void);
+extern void mybat(void);
 
 #if 0
 int main () {
     //  Primary Usage Page:
     //    kHIDPage_AppleVendor                        = 0xff00,
+    //    kHIDPage_AppleVendorTemperatureSensor       = 0xff05,
     //    kHIDPage_AppleVendorPowerSensor             = 0xff08,
     //
     //  Primary Usage:
