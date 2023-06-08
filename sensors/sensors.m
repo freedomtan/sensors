@@ -132,32 +132,32 @@ void dumpNames(CFArrayRef names, char *cat)
     }
 }
 
-NSArray* currentArray() {
+NSArray* currentArray(void) {
     CFDictionaryRef currentSensors = matching(0xff08, 2);
     return CFBridgingRelease(getProductNames(currentSensors));
 }
 
-NSArray* voltageArray() {
+NSArray* voltageArray(void) {
     CFDictionaryRef currentSensors = matching(0xff08, 3);
     return CFBridgingRelease(getProductNames(currentSensors));
 }
 
-NSArray* thermalArray() {
+NSArray* thermalArray(void) {
     CFDictionaryRef currentSensors = matching(0xff00, 5);
     return CFBridgingRelease(getProductNames(currentSensors));
 }
 
-NSArray* returnCurrentValues() {
+NSArray* returnCurrentValues(void) {
     CFDictionaryRef currentSensors = matching(0xff08, 2);
     return CFBridgingRelease(getPowerValues(currentSensors));
 }
 
-NSArray* returnVoltageValues() {
+NSArray* returnVoltageValues(void) {
     CFDictionaryRef voltageSensors = matching(0xff08, 3);
     return CFBridgingRelease(getPowerValues(voltageSensors));
 }
 
-NSArray* returnThermalValues() {
+NSArray* returnThermalValues(void) {
     CFDictionaryRef currentSensors = matching(0xff00, 5);
     return CFBridgingRelease(getThermalValues(currentSensors));
 }
